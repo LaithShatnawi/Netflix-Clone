@@ -5,7 +5,7 @@ function MovieList(props) {
     return (
         <div className='cards'>
             {
-                props.movieList.map((item, idx) => {
+                props.movieList?.map((item, idx) => {
                     return (
                         <Movie key={idx} cardData={item} />
                     )
