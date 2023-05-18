@@ -12,8 +12,8 @@ function Home() {
         useEffect(() => {
             serverdata();
         }, [])
-        console.log({moviesData})
-    return (
+
+        return (
         <>
             <MovieList movieList={moviesData}/>
         </>

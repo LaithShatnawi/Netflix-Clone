@@ -40,14 +40,20 @@ function updateMoviesHandler(req, res) {
     let sql = `update movies set title=$1, release_date=$2, poster_path=$3, overview=$4 where id = ${movieId} returning *`;
     const values = [req.body.title, req.body.release_date, req.body.poster_path, req.body.overview];
     client.query(sql, values).then((data) => {
-        res.status(201).send(data.rows);
+        let newSql = 'select * from movies';
+        client.query(newSql).then((updatedData) => {
+            res.status(200).json(updatedData.rows);
+        })
     })
 }
 function deleteMovieHandler(req, res) {
     let movieId = req.params.id;
     let sql = `delete from movies where id = ${movieId}`;
     client.query(sql).then((data) => {
-        res.status(202).send('deleted successfully');
+        let newSql = 'select * from movies';
+        client.query(newSql).then((updatedData) => {
+            res.status(200).json(updatedData.rows);
+        })
     })
 }
 function getCertainMovieHandler(req, res) {

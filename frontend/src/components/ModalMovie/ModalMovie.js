@@ -18,6 +18,7 @@ function ModalMovie(props) {
             overview: favData
         }
         axios.post(url, movie).then((data) => data);
+        props.handleClose();
     }
 
     return (
@@ -27,7 +28,7 @@ function ModalMovie(props) {
                     <Modal.Title>{props.movieData.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Card.Img variant="top" src={props.movieData.poster_path} alt='movie poster' />
+                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${props.movieData.poster_Path}`} alt='movie poster' />
                     <Form onSubmit={addToFavorite} method='POST'>
                         <Form.Group as={Col} md="4" controlId="validationCustom01">
                             <Form.Label>Comment</Form.Label>
@@ -35,7 +36,7 @@ function ModalMovie(props) {
                                 required
                                 type="text"
                                 placeholder="Comment"
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setFavData(event.target.value)
                                 }}
                             />

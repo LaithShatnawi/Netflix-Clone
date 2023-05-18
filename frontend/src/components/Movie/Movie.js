@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ModalMovie from '../ModalMovie/ModalMovie';
 import { useState } from 'react';
+import './Movie.css'
+
 
 function Movie(props) {
     const [show, setShow] = useState(false);
@@ -14,21 +16,21 @@ function Movie(props) {
         setShow(false);
     }
     return (
-        <div>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={props.cardData.poster_path} alt='movie poster' />
+        <>
+            <Card className='card' style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${props.cardData.poster_Path}`} />
                 <Card.Body>
                     <Card.Title>{props.cardData.title}</Card.Title>
                     <Card.Text>
-                        <p>{props.cardData.release_date}</p>
-                        <p>{props.cardData.overview}</p>
+                        <span>{props.cardData.release_date}</span><br/>
+                        <span>{props.cardData.overview}</span>
                     </Card.Text>
-                    <Button variant="primary" onClick={()=>{showModal(props.cardData)}}>Add to Favorites</Button>
+                    <Button variant="primary" onClick={() => { showModal(props.cardData) }}>Add to Favorites</Button>
                 </Card.Body>
             </Card>
 
             <ModalMovie handleShow={show} handleClose={closeModal} movieData={movieData} />
-        </div>
+        </>
     );
 }
 export default Movie;
